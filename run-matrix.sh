@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Per channel (e2e latest, nightly): the no-model check, then record + replay of the OTP test.
-# Usage: ./run-matrix.sh                                  # check only
-#        GOOGLE_GENERATIVE_AI_API_KEY=... ./run-matrix.sh  # check + agent runs
+# Usage: ./run-matrix.sh                                        # check only
+#        AI_GATEWAY_API_KEY=... ./run-matrix.sh                  # check + agent runs (or GOOGLE_GENERATIVE_AI_API_KEY)
 set -uo pipefail
 cd "$(dirname "$0")"
 
@@ -26,7 +26,7 @@ for channel in $CHANNELS; do
   echo "== $channel check"
   npm run -s check >"results/$channel/check.txt" 2>&1
   echo "   exit $? ($(tail -1 "results/$channel/check.txt"))"
-  [ -n "${GOOGLE_GENERATIVE_AI_API_KEY:-}" ] || { echo "   no GOOGLE_GENERATIVE_AI_API_KEY: skipping agent runs"; continue; }
+  [ -n "${AI_GATEWAY_API_KEY:-}${GOOGLE_GENERATIVE_AI_API_KEY:-}" ] || { echo "   no AI_GATEWAY_API_KEY or GOOGLE_GENERATIVE_AI_API_KEY: skipping agent runs"; continue; }
   rm -rf .e2e/cache                                   # each channel records from scratch
   for run in 1 2; do                                  # 1 = record, 2 = replay
     out="results/$channel/run$run"; mkdir -p "$out"
