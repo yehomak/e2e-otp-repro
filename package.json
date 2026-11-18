@@ -1,0 +1,16 @@
+{
+  "name": "e2e-otp-repro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test:e2e": "e2e run",
+    "check": "node check.mjs"
+  },
+  "devDependencies": {
+    "@ai-sdk/google": "^4.0.121",
+    "@e2e-dev/web": "^0.16.0",
+    "ai": "^7.0.0",
+    "e2e": "^0.23.1"
+  }
+}
