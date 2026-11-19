@@ -1,5 +1,7 @@
 # e2e: a one-time code typed one digit per box replays the old code
 
+> **Status:** reported in [e2e-inc/e2e#1933](https://github.com/e2e-inc/e2e/issues/1933) · fix in review: [e2e-inc/e2e#1934](https://github.com/e2e-inc/e2e/pull/1934)
+
 One page with six `<input maxlength=1 autocomplete="one-time-code">` boxes and a code that changes on every load.
 e2e checks each typed digit on its own against the screen. A single digit never matches the code shown, so the
 recording keeps the digits as plain input and the next run types the previous code.
